@@ -1,0 +1,295 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Montserrat', sans-serif;
+}
+html, body {
+    height: 100%;
+
+}
+.content-wrapper {
+    min-height: calc(100vh - 150px); 
+}
+
+footer {
+    margin-top: auto;
+    width: 100%;
+    margin-bottom: 0;
+}
+ /* Navbar */
+.layout_body{
+    padding: 10px 0 0 40px;
+} 
+
+.carousel-inner {
+    height: 400px; 
+}
+.carousel-item img {
+    width: 100%;
+    height: 100%; 
+    object-position: center; 
+    
+}
+.div-form{
+    width: 50%;
+    
+}
+.div-form input{
+    border-radius: 20px;
+    
+}
+.div-form>button{
+    width: 25%;
+    border-radius: 20px;
+}
+
+#usernaming{
+    position: relative;
+    float: right;
+    top: 9px;
+    margin-right: 25px;
+ }
+ .line{
+    color: black;
+    font-weight: 500;
+ }
+ .nav-head{
+    background-color: rgb(171, 171, 171) !important; 
+    font-size: 10px;
+}
+.list-1{
+    background-color: rgb(215, 215, 215);
+}
+/* Create-listing */
+form{
+    padding: 1rem;
+}
+/* Listing-details */
+.list-details{
+    margin: 1.5rem 4rem;
+}
+.list-cover{
+    display: flex;
+    gap: 40px;
+
+}
+div #desc{
+    width: 50%;
+    min-width: 200px;
+    color: #622727;
+}
+.listing-image{
+    width: 10%;
+    min-width: 200px;
+}
+
+.break{
+    border-bottom:4px solid #e9eae7;
+    margin: 50px 0;
+}
+
+/* Active Listings */
+#hachi{
+    position: relative;
+    margin-bottom: 2rem;
+}
+.listing-image{
+    width: 100%;
+    height: 18rem;
+}
+.para-text{
+   text-align: left;
+   font-size: 14px;
+}
+.Active-container{
+    width: 100%;
+    height:30rem ;
+    overflow:auto;
+}
+.footer-image{
+    width: 80%;
+    margin: 0 auto; 
+    
+}
+.footer-image img{
+    border-radius: 70px 10px;
+}
+/* footer style */
+.foot {
+    padding: 3rem;
+   
+    font-size: 1.1rem;
+}
+.bg-footer{
+    background-color: #e9eae7;
+}
+
+/* Register/ lOGIN */
+.my_form{
+    background-color: rgb(2, 26, 103);
+    width: 40%;
+    height: auto;
+    margin-top: 4rem;
+    border-radius: 7px;
+    color: white;
+    padding: 3rem;
+     
+}
+.text_h1{
+    margin-top: 5px;
+    font-size: 30px;
+    font-weight: bold;
+}
+.input-submit{
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: center;
+    border-radius: 20px;
+    margin: 40px auto 0;
+    padding: 7px;
+    border: none;   
+}
+ /* Create Listings */
+ .m_form {
+    max-width: 500px;
+    margin:2rem auto;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 5px 1px 3px 4px rgba(0, 0, 0, 0.1);
+}
+
+.text_h {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+/* Watchlist */
+.watchlist-page h2, li {
+    margin-left: 2rem;
+    color: #333;
+}
+.watchlist-page ul li a {
+    color: #333;
+}
+
+/* Media Query */
+
+
+@media (max-width: 1200px) {
+    .my_form{
+        width: 60%;
+        height: auto;
+        margin: 0 auto;
+        padding: 3rem;
+        border-radius: none;
+    } 
+    .carousel-inner img {
+        max-height: 250px; 
+    } 
+    .listing-image{
+        width: 100%;
+        height: 10rem;
+    }
+    .Active-container{
+        width: 100%;
+        height: 25rem;
+        overflow:auto;
+    }
+    .div-form{
+        width: 90%;
+        
+        
+    }
+    .div-form input{
+        border-radius: 20px;
+        
+    }
+    .div-form>button{
+        width: 25%;
+        border-radius: 20px;
+    }
+    
+    
+}
+@media (max-width: 768px) {
+    .my_form{
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+        margin: 0;
+        border-radius: none;
+    }
+    .carousel-inner img {
+        max-height: 200px; 
+    }
+    .listing-image{
+        width: 100%;
+        height: 18rem;
+        margin: 0 auto;
+    }
+    #hachi{
+        position: relative;
+        margin-left: 2rem;
+    }
+    .Active-container{
+        width: 100%;
+        height: 32rem;
+        overflow:auto;
+    }
+    .div-form{
+        width: 90%;
+        
+    }
+    .div-form input{
+        border-radius: 20px;
+        
+    }
+    .div-form>button{
+        width: 30%;
+        border-radius: 20px;
+    }
+    
+    
+}
+
+    @media (max-width: 576px) {
+    .my_form{
+        max-width: 100%;
+        height: 100vh;
+        padding: 1rem;
+        margin: 0;
+        border-radius: 0;
+    }
+    .text_h1{
+        padding: 5px;
+        font-size: 25px;
+    }
+    .carousel-inner img {
+        max-height: 150px; /* Further reduced height for very small screens */
+    }
+    .Active-container{
+        width: 70%;
+        height: 30rem;
+        overflow:auto;
+        margin: 0 auto;
+    }
+    .div-form{
+        width: 90%;
+        
+    }
+    .div-form input{
+        border-radius: 20px;
+        
+    }
+    .div-form>button{
+        width: 30%;
+        border-radius: 20px;
+    }
+    
+
+}
+    

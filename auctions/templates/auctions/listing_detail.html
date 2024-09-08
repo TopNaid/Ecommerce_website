@@ -1,0 +1,85 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+    {{ listing.title }}
+{% endblock %}
+
+{% block body %}
+<div class="list-details">
+    <div class="list-cover">
+        <div class="">
+            {% if listing.image_url %}
+                <img src="{{ listing.image_url }}" alt="{{ listing.title }}" class="listing-image" style="width:100%;max-width: 600px;height:auto;">
+            {% endif %}
+        </div>
+        <div class="list-desc">
+            <h2>{{ listing.title }}</h2>
+            <p id="desc">{{ listing.description }}</p>
+            <p><strong>Current Price:</strong> ${{ listing.current_bid|default:listing.starting_bid }}</p>
+            <p><strong>Category:</strong> {{ listing.category }}</p>
+            {% if user.is_authenticated %}
+            <form action="{% url 'listing_detail' listing.id %}" method="post">
+                {% csrf_token %}
+                {% if on_watchlist %}
+                    <button type="submit" name="watchlist" class="btn btn-secondary" style=" width:100%; max-width: 400px; border-radius: 20px; padding: 8px;">
+                        Remove from Watchlist
+                    </button>
+                {% else %}
+                    <button type="submit" name="watchlist" class="btn btn-primary" style=" width: 100%; max-width: 400px; border-radius: 20px; padding: 8px;">
+                        Add to Watchlist
+                    </button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+        <div class="break"></div>
+        <h4 class="mb-4"><strong>Place a Bid</strong></h4>
+        <form action="{% url 'listing_detail' listing.id %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" name="bid" class="btn btn-success" style="width:10%; min-width: 200px; margin-top: 15px;">Place Bid</button>
+        </form>
+        <div class="break"></div>
+    {% else %}
+        <p><a href="{% url 'login' %}">Log in</a> to bid or manage your watchlist.</p>
+    {% endif %}
+
+    {% if request.user == listing.created_by and listing.is_active %}
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" name="close_auction" class="btn btn-danger">Close Auction</button>
+        </form>
+    {% endif %}
+
+    {% if not listing.is_active %}
+        <p class="alert alert-info">
+            This auction is closed.
+            {% if is_winner %}
+                Congratulations! You won this auction.
+            {% endif %}
+        </p>
+    {% endif %}
+
+    <h4 class="mt-4"><strong>Comments</strong></h4>
+    {% for comment in comments %}
+        <div class="comment" style="margin-top: 40px;">
+            <p><strong>{{ comment.user.username }}:</strong> {{ comment.content }}</p>
+            <p><small>{{ comment.commented_at }}</small></p>
+        </div>
+    {% empty %}
+        <p>No comments yet.</p>
+    {% endfor %}
+     <div>
+        {% if user.is_authenticated %}
+            <form action="{% url 'listing_detail' listing.id %}" method="post">
+                {% csrf_token %}
+                <textarea name="comment_content" placeholder="Add a comment." required style="padding-left: 20px;padding-top: 7px; width: 51%;min-width: 400px; outline: none; border-color: rgb(213, 211, 211); border-radius: 30px; min-height: 50px; height: auto; box-shadow: 2px 2px 8px 2px rgb(201, 201, 201);"></textarea><br>
+                <button type="submit" name="comment" class="btn btn-primary mt-4">Post Comment</button>
+            </form>
+        {% else %}
+            <p><a href="{% url 'login' %}">Log in</a> to post a comment.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

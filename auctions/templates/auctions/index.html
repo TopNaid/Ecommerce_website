@@ -1,0 +1,49 @@
+{% extends "auctions/layout.html" %}
+
+
+{% block title %}
+    Active Listings
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+      <h2 class="ps-5 mt-4 text-center"><strong>Auctions</strong></h2>
+         <h3 id="hachi">Active Listings</h3>
+            <div class="row">
+                {% for listing in listings %}
+                <div class="col-md-4 col-sm-6 mb-4 list-box"> <!-- Each item will take up 6 columns, creating two columns in a row -->
+                    <div class="card Active-container">
+                        {% if listing.image_url %}
+                        <a href="{% url 'listing_detail' listing.id %}">
+                            <img src="{{ listing.image_url }}" alt="{{ listing.title }}" class="img-fluid listing-image" >
+                        </a>
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ listing.title }}</h5>
+                            <p class="card-text para-text">
+                              {{ listing.description|slice:":80" }} <!-- Truncate the description to 100 characters -->
+                              {% if listing.description|length > 80 %}
+                              ..
+                              {% endif %}
+                            </p>
+                            <p><strong>Current Price:<span style="color: rgb(4, 221, 4);"> ${{ listing.current_bid|default:listing.starting_bid }}</span></strong></p>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No active listings at the moment.</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="footer-image">
+          <img src="https://i.imgur.com/k0lZR5K.jpeg" class="d-block w-80 img-fluid" alt="footer image">
+      </div>
+    </div>
+{% endblock %}
+
+
+
+
+  
+                          
+    

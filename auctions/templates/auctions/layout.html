@@ -1,0 +1,157 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>{% block title %}Auctions{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'auctions/styles.css' %}">
+</head>
+<body>
+
+    {% if request.resolver_match.url_name != 'login' and request.resolver_match.url_name != 'register' and request.resolver_match.url_name != 'create_listing' %}
+        <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark bg-dark">
+            <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'index' %}"><h4><strong>BeeBest</strong></h4></a>
+            <button class="navbar-toggler color-black" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation" >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'create_listing' %}">Create Listing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'watchlist' %}">
+                        Watchlist <span class="badge badge-pill badge-info">{{ watchlist_count }}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'category_list' %}">Categories</a>
+                </li>
+                </ul>
+                <form class="d-flex div-form" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+            </div>
+        </nav>
+        <div class="list-1">
+            <div id="usernaming">
+                {% if user.is_authenticated %}
+                    Signed in. <strong>Hi, {{ user.username }}</strong>
+                {% else %}
+                    Not signed in.
+                {% endif %}
+            </div>
+
+            <ul class="nav ps-3">
+                <li class="nav-item">
+                    <a class="nav-link line" href="{% url 'category_list' %}">Fashion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link line" href="{% url 'category_list' %}">Electronics</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link line" href="{% url 'category_list' %}">Sports</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link line" href="{% url 'category_list' %}">Automotive</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link line" href="{% url 'category_list' %}">Home & Garden</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link line" href="{% url 'logout' %}">Log Out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link line" href="{% url 'login' %}">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link line" href="{% url 'register' %}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+
+        </div>
+        <div id="carouselExamplefade" class="carousel slide carousel-fade" data-ride="carousel" data-interval="5000">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://i.imgur.com/WaZKnBN.png" class="d-block w-100 img-fluid" alt="First Slide">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://i.imgur.com/DlnbEW8.png" class="d-block w-100 img-fluid" alt="Second Slide">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://i.imgur.com/PNtMxx0.png" class="d-block w-100 img-fluid" alt="Third Slide">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://i.imgur.com/1x4seVL.png" class="d-block w-100 img-fluid" alt="Fourth Slide">
+                </div>
+            </div>
+        </div>
+        
+      
+        <hr>
+    {% endif %}
+
+    <div class="content-wrapper">
+        {% block body %}
+        {% endblock %}
+    </div>
+    <footer class="bg-footer text-dark mt-5">
+        <div class="foot">
+          <div class="row">
+            <div class="col-md-4">
+              <h5 class="five"><strong>Categories</strong></h5>
+              <ul class="list-unstyled">
+                <li><a class="nav-link line" href="{% url 'category_list' %}">Fashion</a></li>
+                <li><a class="nav-link line" href="{% url 'category_list' %}">Electronics</a></li>
+                <li><a class="nav-link line" href="{% url 'category_list' %}">Sports</a></li>
+                <li><a class="nav-link line" href="{% url 'category_list' %}">Automotive</a></li>
+                <li><a class="nav-link line" href="{% url 'category_list' %}">Home & Garden</a></li>
+            </ul>
+            </div>
+            <div class="col-md-4">
+                <h5 class="five"><strong>Follow us</strong></h5>
+                <ul class="list-unstyled ">
+                  <li><a href="#" class="text-dark">Facebook</a></li>
+                  <li><a href="#" class="text-dark">Twitter</a></li>
+                  <li><a href="#" class="text-dark">Instagram</a></li>
+                </ul>
+              </div>
+            <div class="col-md-4">
+                <ul class="list-unstyled ">
+                  <li><a class="nav-link" href="{% url 'index' %}">Active Listings</a></li>
+                  <li><a class="nav-link" href="{% url 'create_listing' %}">Create Listing</a></li>
+                  <li><a class="nav-link" href="{% url 'watchlist' %}">Watchlist</a></li>
+                </ul>
+              </div>
+          </div>
+          <div class="text-center mt-3">
+            <p class="fun">&copy; 2024 HabeeBest All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+        
